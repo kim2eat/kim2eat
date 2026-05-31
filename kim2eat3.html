@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>kim2eat — Школа домашней корейской кухни</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --bg:        #F7F6F3;
+      --white:     #FFFFFF;
+      --accent:    #E8472A;
+      --accent-lt: #FFF0EC;
+      --accent-2:  #4CAF7D;
+      --dark:      #111111;
+      --mid:       #666666;
+      --soft:      #999999;
+      --line:      #E8E8E4;
+      --surface:   #F0EDE8;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+      max-width: 420px;
+      margin: 0 auto;
+      padding-bottom: 60px;
+    }
+
+    /* ══════════════════════════════
+       HERO
+    ══════════════════════════════ */
+    .hero {
+      background: var(--white);
+      padding: 36px 24px 32px;
+      text-align: center;
+    }
+
+    .school-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent-lt);
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 20px;
+      margin-bottom: 18px;
+    }
+
+    .hero-title {
+      font-size: 30px;
+      font-weight: 900;
+      line-height: 1.1;
+      color: var(--dark);
+      margin-bottom: 10px;
+      letter-spacing: -1px;
+    }
+
+    .hero-title span {
+      color: var(--accent);
+    }
+
+    .hero-desc {
+      font-size: 14px;
+      color: var(--mid);
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    /* ── Аватар ── */
+    .avatar-wrap {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--surface);
+      border-radius: 20px;
+      padding: 16px;
+      text-align: left;
+      margin-bottom: 24px;
+    }
+
+    .avatar-img {
+      width: 150px;
+      height: 180px;
+      border-radius: 14px;
+      background-image: url('AsiyaKim.jpeg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-color: #f0ede8;
+      flex-shrink: 0;
+    }
+
+    .avatar-text h2 {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+
+    .avatar-text p {
+      font-size: 12px;
+      color: var(--mid);
+      line-height: 1.5;
+    }
+
+    /* ── CTA ── */
+    .btn-main {
+      display: block;
+      padding: 16px;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      background: var(--accent);
+      color: var(--white);
+      letter-spacing: 0.1px;
+    }
+
+    .btn-outline {
+      display: block;
+      padding: 14px;
+      border-radius: 14px;
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+      text-decoration: none;
+      background: transparent;
+      color: var(--dark);
+      border: 1.5px solid var(--line);
+    }
+
+    .hero-note {
+      font-size: 12px;
+      color: var(--soft);
+      margin-top: 12px;
+      line-height: 1.5;
+    }
+
+    /* ══════════════════════════════
+       SECTIONS
+    ══════════════════════════════ */
+    .sec {
+      padding: 28px 20px;
+      border-top: 1px solid var(--line);
+    }
+
+    .sec-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .sec-title {
+      font-size: 21px;
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--dark);
+      margin-bottom: 18px;
+      letter-spacing: -0.3px;
+    }
+
+    /* ══════════════════════════════
+       DISH GALLERY
+    ══════════════════════════════ */
+    .gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .g-card {
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 1;
+      background: var(--surface);
+    }
+
+    .g-card.big {
+      grid-column: span 2;
+      aspect-ratio: 16/9;
+    }
+
+    .g-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .g-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 20px 10px 8px;
+      background: linear-gradient(to top, rgba(0,0,0,0.65), transparent);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    /* ══════════════════════════════
+       REASON CARDS (5 причин)
+    ══════════════════════════════ */
+    .reason-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .reason-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--white);
+      border-radius: 16px;
+      padding: 16px;
+      border: 1px solid var(--line);
+    }
+
+    .reason-num {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--accent);
+      line-height: 1;
+      min-width: 28px;
+    }
+
+    .reason-text {
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--dark);
+      font-weight: 500;
+      padding-top: 2px;
+    }
+
+    /* ══════════════════════════════
+       INSIDE LIST
+    ══════════════════════════════ */
+    .inside-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .i-item {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 14px 16px;
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      border: 1px solid var(--line);
+    }
+
+    .i-icon {
+      font-size: 22px;
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      background: var(--surface);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .i-body { flex: 1; }
+
+    .i-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .i-desc {
+      font-size: 12px;
+      color: var(--mid);
+      line-height: 1.45;
+      margin-top: 2px;
+    }
+
+    .i-tag {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--accent);
+      background: var(--accent-lt);
+      border-radius: 8px;
+      padding: 3px 8px;
+      white-space: nowrap;
+    }
+
+    /* ══════════════════════════════
+       URGENCY
+    ══════════════════════════════ */
+    .urgency {
+      background: #FFF3E0;
+      border-top: 1px solid #FFD0A0;
+      border-bottom: 1px solid #FFD0A0;
+      padding: 16px 20px;
+      text-align: center;
+    }
+
+    .urgency-main {
+      font-size: 14px;
+      font-weight: 700;
+      color: #B84F00;
+    }
+
+    .urgency-sub {
+      font-size: 12px;
+      color: #C47A3A;
+      margin-top: 3px;
+    }
+
+    /* ══════════════════════════════
+       TARIFFS
+    ══════════════════════════════ */
+    .tariff-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .tariff {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 22px;
+      border: 1.5px solid var(--line);
+    }
+
+    .tariff.top {
+      border-color: var(--accent);
+      border-width: 2px;
+    }
+
+    .tariff-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      border-radius: 20px;
+      padding: 4px 10px;
+      margin-bottom: 12px;
+      background: var(--accent-lt);
+      color: var(--accent);
+    }
+
+    .tariff-name {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--dark);
+      margin-bottom: 2px;
+      letter-spacing: -0.3px;
+    }
+
+    .tariff-period {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--soft);
+      margin-bottom: 16px;
+    }
+
+    .tariff-price-box {
+      background: var(--bg);
+      border-radius: 14px;
+      padding: 14px;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .tariff.top .tariff-price-box {
+      background: var(--accent-lt);
+    }
+
+    .tariff-price {
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--dark);
+      line-height: 1;
+    }
+
+    .tariff.top .tariff-price {
+      color: var(--accent);
+    }
+
+    .tariff-per {
+      font-size: 11px;
+      color: var(--soft);
+      margin-top: 4px;
+    }
+
+    /* ══════════════════════════════
+       REVIEWS
+    ══════════════════════════════ */
+    .review-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .review {
+      background: var(--white);
+      border-radius: 18px;
+      padding: 18px;
+      border: 1px solid var(--line);
+    }
+
+    .review-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .review-ava {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .review-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .review-stars {
+      font-size: 12px;
+      color: #F59E0B;
+      margin-left: auto;
+      letter-spacing: 1px;
+    }
+
+    .review-badge {
+      display: inline-block;
+      background: var(--accent-lt);
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 8px;
+      padding: 4px 10px;
+      margin-bottom: 10px;
+    }
+
+    .review-text {
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--mid);
+    }
+
+    /* ══════════════════════════════
+       FAQ
+    ══════════════════════════════ */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .faq {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 16px;
+      border: 1px solid var(--line);
+    }
+
+    .faq-q {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 6px;
+    }
+
+    .faq-a {
+      font-size: 12px;
+      color: var(--mid);
+      line-height: 1.6;
+    }
+
+    /* ══════════════════════════════
+       FINAL CTA
+    ══════════════════════════════ */
+    .final {
+      background: var(--accent);
+      padding: 36px 24px 40px;
+      text-align: center;
+    }
+
+    .final h2 {
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
+    }
+
+    .btn-final-outline {
+      display: block;
+      padding: 15px;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      background: var(--white);
+      color: var(--accent);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 11px;
+      color: var(--soft);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ HERO ══ -->
+  <div class="hero">
+
+    <div class="school-badge">🥢 kim2eat</div>
+
+    <h1 class="hero-title">Школа домашней<br><span>корейской кухни</span></h1>
+
+    <p class="hero-desc">Корейская еда дома — проще, чем ты думаешь.</p>
+
+    <div class="avatar-wrap">
+      <div class="avatar-img"></div>
+      <div class="avatar-text">
+        <h2>Привет! Я Настя 👋</h2>
+        <p>Нутрициолог с корейскими корнями.<br>Готовлю по рецептам мамы — адаптирую под современное здоровое питание.</p>
+      </div>
+    </div>
+
+    <a href="#tariffs" class="btn-main">Начать обучение →</a>
+
+    <p class="hero-note">Полный доступ ко всем урокам.<br>Если не понравится — вернём деньги.</p>
+
+  </div>
+
+  <!-- ══ ГАЛЕРЕЯ БЛЮД ══ -->
+  <div class="sec">
+    <div class="sec-eyebrow">Что будем готовить</div>
+    <div class="sec-title">Блюда из школы</div>
+    <div class="gallery">
+      <div class="g-card big">
+        <img src="kimchi.jpeg" alt="Традиционное кимчи" />
+        <div class="g-label">Традиционное кимчи</div>
+      </div>
+      <div class="g-card">
+        <img src="kuksi.jpeg" alt="Горячее кукси" />
+        <div class="g-label">Горячее кукси — корейская лапша</div>
+      </div>
+      <div class="g-card">
+        <img src="bibimbap.jpeg" alt="Пибимпаб" />
+        <div class="g-label">Пибимпаб — корейское ризотто</div>
+      </div>
+      <div class="g-card">
+        <img src="white-kimchi.jpeg" alt="Белое кимчи" />
+        <div class="g-label">Белое кимчи — неострое</div>
+      </div>
+      <div class="g-card">
+        <img src="kaktugi2.jpeg" alt="Кактуги" />
+        <div class="g-label">Кактуги — кимчи из редьки</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 5 ПРИЧИН ══ -->
+  <div class="sec">
+    <div class="sec-eyebrow">Ваша выгода</div>
+    <div class="sec-title">5 причин начать готовить со мной</div>
+    <div class="reason-list">
+      <div class="reason-card">
+        <div class="reason-num">1</div>
+        <div class="reason-text">Научитесь просто готовить сложные рецепты</div>
+      </div>
+      <div class="reason-card">
+        <div class="reason-num">2</div>
+        <div class="reason-text">Экономите время и деньги — только нужные ингредиенты и пошаговые инструкции</div>
+      </div>
+      <div class="reason-card">
+        <div class="reason-num">3</div>
+        <div class="reason-text">Разнообразите свой рацион полезной ферментированной едой</div>
+      </div>
+      <div class="reason-card">
+        <div class="reason-num">4</div>
+        <div class="reason-text">Удивите себя и близких необычными и вкусными рецептами</div>
+      </div>
+      <div class="reason-card">
+        <div class="reason-num">5</div>
+        <div class="reason-text">100% проверено — каждый рецепт прошёл через мою семью</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ ЧТО ВНУТРИ ══ -->
+  <div class="sec">
+    <div class="sec-eyebrow">Программа</div>
+    <div class="sec-title">Что внутри школы</div>
+    <div class="inside-list">
+      <div class="i-item">
+        <div class="i-icon">🎬</div>
+        <div class="i-body">
+          <div class="i-title">Видеоуроки с Настей</div>
+          <div class="i-desc">Пошагово, с крупным планом — как будто стоите рядом на кухне</div>
+        </div>
+      </div>
+      <div class="i-item">
+        <div class="i-icon">🥬</div>
+        <div class="i-body">
+          <div class="i-title">Модуль ферментации</div>
+          <div class="i-desc">Кимчи, ккакдуги, огуречное кимчи</div>
+        </div>
+        <div class="i-tag">🔥 Хит</div>
+      </div>
+      <div class="i-item">
+        <div class="i-icon">📋</div>
+        <div class="i-body">
+          <div class="i-title">PDF-рецепты + чек-листы</div>
+          <div class="i-desc">Открываете на телефоне прямо на кухне</div>
+        </div>
+      </div>
+      <div class="i-item">
+        <div class="i-icon">🔄</div>
+        <div class="i-body">
+          <div class="i-title">Понятные замены</div>
+          <div class="i-desc">В каждом рецепте проговариваю, чем можно легко заменить любые ингредиенты без потери вкуса.</div>
+        </div>
+        <div class="i-tag">Уникально</div>
+      </div>
+      <div class="i-item">
+        <div class="i-icon">💬</div>
+        <div class="i-body">
+          <div class="i-title">Чат поддержки с Настей</div>
+          <div class="i-desc">Задаёте вопрос — получаете ответ</div>
+        </div>
+      </div>
+      <div class="i-item">
+        <div class="i-icon">🎁</div>
+        <div class="i-body">
+          <div class="i-title">Новые рецепты каждый месяц</div>
+          <div class="i-desc">База живая и пополняется</div>
+        </div>
+        <div class="i-tag">Эксклюзив</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ URGENCY ══ -->
+  <div class="urgency">
+    <div class="urgency-main">⏰ Скоро повышение цен</div>
+    <div class="urgency-sub">Успейте занять место по старой стоимости</div>
+  </div>
+
+  <!-- ══ ТАРИФЫ ══ -->
+  <div class="sec" id="tariffs">
+    <div class="sec-eyebrow">Тарифы</div>
+    <div class="sec-title">Выберите формат</div>
+    <div class="tariff-list">
+
+      <div class="tariff">
+        <h3 class="tariff-name">🥢 Старт</h3>
+        <div class="tariff-period">30 дней доступа</div>
+        <div class="tariff-price-box">
+          <div class="tariff-price">1 490 ₽</div>
+          <div class="tariff-per">≈ 50 ₽ в день</div>
+        </div>
+        <a href="https://kim2eat.getcourse.ru/page_pay30days" class="btn-main">Купить за 1 490 ₽ →</a>
+      </div>
+
+      <div class="tariff top">
+        <div class="tariff-tag">⭐ Выбор большинства</div>
+        <h3 class="tariff-name">🏆 Погружение</h3>
+        <div class="tariff-period">90 дней доступа</div>
+        <div class="tariff-price-box">
+          <div class="tariff-price">3 490 ₽</div>
+          <div class="tariff-per">≈ 39 ₽ в день — выгоднее на 22%</div>
+        </div>
+        <a href="https://kim2eat.getcourse.ru/page_pay90days" class="btn-main">Купить за 3 490 ₽ →</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ ОТЗЫВЫ ══ -->
+  <div class="sec">
+    <div class="sec-eyebrow">Отзывы</div>
+    <div class="sec-title">Что говорят ученицы</div>
+    <div class="review-list">
+      <div class="review">
+        <div class="review-head">
+          <div class="review-ava">👩</div>
+          <div>
+            <div class="review-name">Марина, 34 года</div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+        </div>
+        <div class="review-badge">🏆 Приготовила кимчи за первую неделю</div>
+        <p class="review-text">Думала, корейская еда — это сложно. После первого урока всё встало на место. Муж сказал, что это лучшее, что я готовила за 5 лет. 😊</p>
+      </div>
+      <div class="review">
+        <div class="review-head">
+          <div class="review-ava">👩‍🦱</div>
+          <div>
+            <div class="review-name">Алина, 28 лет</div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+        </div>
+        <p class="review-text">Теперь не трачу время на поиск разных рецептов в интернете, удобно что все в одном месте. Знаю теперь где купить нужные продукты в городе.</p>
+      </div>
+      <div class="review">
+        <div class="review-head">
+          <div class="review-ava">👩‍🦳</div>
+          <div>
+            <div class="review-name">Ольга, 41 год</div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+        </div>
+        <div class="review-badge">🥗 Вся семья перешла на домашнее</div>
+        <p class="review-text">Я нутрициолог, но корейская кухня была тёмным лесом. Настя объяснила всё — теперь корейские блюда каждую неделю на нашем столе.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ FAQ ══ -->
+  <div class="sec">
+    <div class="sec-eyebrow">Вопросы</div>
+    <div class="sec-title">Отвечаем честно</div>
+    <div class="faq-list">
+      <div class="faq">
+        <div class="faq-q">Я никогда не готовила корейскую еду. Подойдёт?</div>
+        <div class="faq-a">Да. Школа построена с нуля. Первый урок — в день покупки.</div>
+      </div>
+      <div class="faq">
+        <div class="faq-q">Нужны специальные ингредиенты и посуда?</div>
+        <div class="faq-a">Нет. Всё адаптировано под обычный магазин и стандартную кухню.</div>
+      </div>
+      <div class="faq">
+        <div class="faq-q">Как работает возврат за 3 дня?</div>
+        <div class="faq-a">Попробуйте 3 дня. Не понравится — вернём деньги за 24 часа. Без вопросов.</div>
+      </div>
+      <div class="faq">
+        <div class="faq-q">Можно учиться в своём темпе?</div>
+        <div class="faq-a">Да. Все уроки в записи, доступны 24/7. Хоть в 23:00 на кухне.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ FINAL CTA ══ -->
+  <div class="final">
+    <h2>Начните сегодня,<br>чтобы порадовать себя завтра 🥢</h2>
+    <a href="https://t.me/+2g2s9bITXIVmMzU0" class="btn-final-outline">Написать Насте →</a>
+  </div>
+
+  <div class="footer">© 2025 Настя · Школа домашней корейской кухни · kim2eat</div>
+
+</body>
+</html>
